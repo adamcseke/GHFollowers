@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  GHFollowers
+
+  Created by Adam Cseke on 2022. 02. 07..
+  
+*/
+
+"ButtonTitleLabel.GF" = "Get Followers";
+"ButtonTitleLabel.GP" = "Github Profile";
+"ButtonTitleLabel.WS" = "Website";
