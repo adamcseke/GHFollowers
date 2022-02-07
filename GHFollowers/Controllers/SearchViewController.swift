@@ -9,10 +9,9 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
-    private var getFollowersButton: Button!
-    private var githubProfileButton: Button!
-    private var website: Button!
+    private var followersButton: Button!
     private var textfield: Textfield!
+    private var logoImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,53 +20,23 @@ class SearchViewController: UIViewController {
         
     }
     private func setup() {
-        configureGetFollowersButton()
-        configureGithubProfileButton()
-        configureWebsiteButton()
+        configureLogoImageView()
         configureTextfield()
+        configureGetFollowersButton()
     }
     
-    private func configureGetFollowersButton() {
-        getFollowersButton = Button()
-        getFollowersButton.setButtonType(buttonType: ButtonType.followers)
-        getFollowersButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(getFollowersButton)
+    private func configureLogoImageView() {
+        logoImageView = UIImageView()
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        logoImageView.image = UIImage(named: "gh-logo")
+        logoImageView.layer.masksToBounds = true
+        view.addSubview(logoImageView)
         
         NSLayoutConstraint.activate([
-            getFollowersButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            getFollowersButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            getFollowersButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -85),
-            getFollowersButton.heightAnchor.constraint(equalToConstant: 62)
-        ])
-    }
-    
-    private func configureGithubProfileButton() {
-        githubProfileButton = Button()
-        githubProfileButton.setButtonType(buttonType: ButtonType.githubProfile)
-        githubProfileButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(githubProfileButton)
-        
-        NSLayoutConstraint.activate([
-            githubProfileButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            githubProfileButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            githubProfileButton.bottomAnchor.constraint(equalTo: getFollowersButton.topAnchor, constant: -30),
-            githubProfileButton.heightAnchor.constraint(equalToConstant: 62)
-        ])
-    }
-    
-    private func configureWebsiteButton() {
-        website = Button()
-        website.setButtonType(buttonType: ButtonType.website)
-        website.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(website)
-        
-        NSLayoutConstraint.activate([
-            website.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            website.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            website.bottomAnchor.constraint(equalTo: githubProfileButton.topAnchor, constant: -30),
-            website.heightAnchor.constraint(equalToConstant: 62)
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 105),
+            logoImageView.heightAnchor.constraint(equalToConstant: 220),
+            logoImageView.widthAnchor.constraint(equalToConstant: 220)
         ])
     }
     
@@ -80,10 +49,24 @@ class SearchViewController: UIViewController {
         view.addSubview(textfield)
         
         NSLayoutConstraint.activate([
-            textfield.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            textfield.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 31),
             textfield.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textfield.bottomAnchor.constraint(equalTo: website.topAnchor, constant: -30),
+            textfield.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 53),
             textfield.heightAnchor.constraint(equalToConstant: 62)
+        ])
+    }
+    
+    private func configureGetFollowersButton() {
+        followersButton = Button()
+        followersButton.setButtonType(buttonType: ButtonType.followers)
+        followersButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(followersButton)
+        
+        NSLayoutConstraint.activate([
+            followersButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 31),
+            followersButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            followersButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -85),
+            followersButton.heightAnchor.constraint(equalToConstant: 62)
         ])
     }
     
