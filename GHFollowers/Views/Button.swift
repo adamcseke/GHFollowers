@@ -15,10 +15,6 @@ enum ButtonType {
 
 class Button: UIControl {
     
-    let green = UIColor(hex: "#2DBA4EFF")
-    let purple = UIColor(hex: "#9013FEFF")
-    let red = UIColor(hex: "#FF233FFF")
-    
     private var buttonLabel: UILabel!
     
     override init(frame: CGRect) {
@@ -68,15 +64,15 @@ class Button: UIControl {
         
         switch buttonType {
         case .followers:
-            backgroundColor = green
+            backgroundColor = Colors.green
             buttonLabel.text = "ButtonTitleLabel.GF".localized
             buttonLabel.font = .systemFont(ofSize: 20, weight: .medium)
         case .githubProfile:
-            backgroundColor = purple
+            backgroundColor = Colors.purple
             buttonLabel.text = "ButtonTitleLabel.GP".localized
             buttonLabel.font = .systemFont(ofSize: 20, weight: .bold)
         case .website:
-            backgroundColor = red
+            backgroundColor = Colors.red
             buttonLabel.text = "ButtonTitleLabel.WS".localized
             buttonLabel.font = .systemFont(ofSize: 20, weight: .bold)
         }

@@ -19,6 +19,8 @@
 		37F86E3627B110E600E8A0CD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37F86E3827B110E600E8A0CD /* Localizable.strings */; };
 		37F86E3A27B1128300E8A0CD /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F86E3927B1128300E8A0CD /* Button.swift */; };
 		37F86E3C27B12F0E00E8A0CD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F86E3B27B12F0E00E8A0CD /* ColorExtension.swift */; };
+		37F86E4027B14F5000E8A0CD /* Textfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F86E3F27B14F5000E8A0CD /* Textfield.swift */; };
+		37F86E4327B1512700E8A0CD /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F86E4227B1512700E8A0CD /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		37F86E3727B110E600E8A0CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37F86E3927B1128300E8A0CD /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		37F86E3B27B12F0E00E8A0CD /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		37F86E3F27B14F5000E8A0CD /* Textfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textfield.swift; sourceTree = "<group>"; };
+		37F86E4227B1512700E8A0CD /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,8 @@
 		3741BE1E27AD336A00200BF9 /* GHFollowers */ = {
 			isa = PBXGroup;
 			children = (
+				37F86E4127B1511700E8A0CD /* Utilities */,
+				37F86E2B27B10E4100E8A0CD /* Controllers */,
 				37F86E3327B1109600E8A0CD /* StringLocalization */,
 				37F86E3027B1106500E8A0CD /* Extensions */,
 				37F86E2927B10E0800E8A0CD /* Views */,
@@ -137,8 +143,8 @@
 		37F86E2927B10E0800E8A0CD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				37F86E3F27B14F5000E8A0CD /* Textfield.swift */,
 				37F86E3927B1128300E8A0CD /* Button.swift */,
-				37F86E2B27B10E4100E8A0CD /* Controllers */,
 				37F86E2A27B10E3500E8A0CD /* Cells */,
 			);
 			path = Views;
@@ -174,6 +180,14 @@
 				37F86E3827B110E600E8A0CD /* Localizable.strings */,
 			);
 			path = StringLocalization;
+			sourceTree = "<group>";
+		};
+		37F86E4127B1511700E8A0CD /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				37F86E4227B1512700E8A0CD /* Colors.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,6 +321,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37F86E4027B14F5000E8A0CD /* Textfield.swift in Sources */,
+				37F86E4327B1512700E8A0CD /* Colors.swift in Sources */,
 				37F86E3A27B1128300E8A0CD /* Button.swift in Sources */,
 				3741BE2427AD336A00200BF9 /* SearchViewController.swift in Sources */,
 				3741BE2027AD336A00200BF9 /* AppDelegate.swift in Sources */,
@@ -507,7 +523,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -534,7 +550,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

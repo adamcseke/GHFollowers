@@ -12,6 +12,7 @@ class SearchViewController: UIViewController {
     private var getFollowersButton: Button!
     private var githubProfileButton: Button!
     private var website: Button!
+    private var textfield: Textfield!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,7 @@ class SearchViewController: UIViewController {
         configureGetFollowersButton()
         configureGithubProfileButton()
         configureWebsiteButton()
+        configureTextfield()
     }
     
     private func configureGetFollowersButton() {
@@ -67,6 +69,26 @@ class SearchViewController: UIViewController {
             website.bottomAnchor.constraint(equalTo: githubProfileButton.topAnchor, constant: -30),
             website.heightAnchor.constraint(equalToConstant: 62)
         ])
+    }
+    
+    private func configureTextfield() {
+        textfield = Textfield()
+        textfield.translatesAutoresizingMaskIntoConstraints = false
+        
+        textfield.addTarget(self, action: #selector(textfieldChanged), for: .editingChanged)
+        
+        view.addSubview(textfield)
+        
+        NSLayoutConstraint.activate([
+            textfield.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            textfield.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            textfield.bottomAnchor.constraint(equalTo: website.topAnchor, constant: -30),
+            textfield.heightAnchor.constraint(equalToConstant: 62)
+        ])
+    }
+    
+    @objc private func textfieldChanged() {
+        print("textfield changed")
     }
 
 
