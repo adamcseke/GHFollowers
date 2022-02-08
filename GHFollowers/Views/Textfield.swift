@@ -7,13 +7,19 @@
 
 import UIKit
 
+protocol TextfieldDelegate: AnyObject {
+    func textfieldDidChange(text: String)
+}
+
 class Textfield: UITextField {
+    
+    weak var customDelegate: TextfieldDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setup()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setup()
@@ -29,6 +35,10 @@ class Textfield: UITextField {
         layer.cornerRadius = 12
         textAlignment = .center
         attributedPlaceholder = NSAttributedString(string: "Textfield.Label".localized, attributes: [ .font: UIFont.boldSystemFont(ofSize: 23.0) ])
+        addTarget(self, action: #selector(textfieldChanged), for: .editingChanged)
     }
     
+    @objc private func textfieldChanged() {
+        customDelegate?.textfieldDidChange(text: text ?? "")
+    }
 }

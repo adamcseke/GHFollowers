@@ -8,7 +8,7 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-
+    
     private var followersButton: Button!
     private var textfield: Textfield!
     private var logoImageView: UIImageView!
@@ -16,6 +16,8 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.isHidden = true
+        self.hideKeyboardWhenTappedAround()
         setup()
         
     }
@@ -43,8 +45,8 @@ class SearchViewController: UIViewController {
     private func configureTextfield() {
         textfield = Textfield()
         textfield.translatesAutoresizingMaskIntoConstraints = false
-        
-        textfield.addTarget(self, action: #selector(textfieldChanged), for: .editingChanged)
+        textfield.customDelegate = self
+        textfield.returnKeyType = .search
         
         view.addSubview(textfield)
         
@@ -65,15 +67,14 @@ class SearchViewController: UIViewController {
         NSLayoutConstraint.activate([
             followersButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 31),
             followersButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            followersButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -85),
+            followersButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -36),
             followersButton.heightAnchor.constraint(equalToConstant: 62)
         ])
     }
-    
-    @objc private func textfieldChanged() {
-        print("textfield changed")
-    }
-
-
 }
 
+extension SearchViewController: TextfieldDelegate {
+    func textfieldDidChange(text: String) {
+        print(text)
+    }
+}

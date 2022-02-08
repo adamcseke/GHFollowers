@@ -21,6 +21,10 @@
 		37F86E3C27B12F0E00E8A0CD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F86E3B27B12F0E00E8A0CD /* ColorExtension.swift */; };
 		37F86E4027B14F5000E8A0CD /* Textfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F86E3F27B14F5000E8A0CD /* Textfield.swift */; };
 		37F86E4327B1512700E8A0CD /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F86E4227B1512700E8A0CD /* Colors.swift */; };
+		37F86E4527B1645500E8A0CD /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F86E4427B1645500E8A0CD /* TabbarController.swift */; };
+		37F86E4727B164CB00E8A0CD /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F86E4627B164CB00E8A0CD /* FavoritesViewController.swift */; };
+		37F86E4927B1670F00E8A0CD /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F86E4827B1670F00E8A0CD /* NavigationController.swift */; };
+		37F86E4B27B16E2200E8A0CD /* ViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F86E4A27B16E2200E8A0CD /* ViewController+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +63,10 @@
 		37F86E3B27B12F0E00E8A0CD /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		37F86E3F27B14F5000E8A0CD /* Textfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textfield.swift; sourceTree = "<group>"; };
 		37F86E4227B1512700E8A0CD /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		37F86E4427B1645500E8A0CD /* TabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarController.swift; sourceTree = "<group>"; };
+		37F86E4627B164CB00E8A0CD /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		37F86E4827B1670F00E8A0CD /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		37F86E4A27B16E2200E8A0CD /* ViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,9 +151,11 @@
 		37F86E2927B10E0800E8A0CD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				37F86E4427B1645500E8A0CD /* TabbarController.swift */,
 				37F86E3F27B14F5000E8A0CD /* Textfield.swift */,
 				37F86E3927B1128300E8A0CD /* Button.swift */,
 				37F86E2A27B10E3500E8A0CD /* Cells */,
+				37F86E4827B1670F00E8A0CD /* NavigationController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -161,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				3741BE2327AD336A00200BF9 /* SearchViewController.swift */,
+				37F86E4627B164CB00E8A0CD /* FavoritesViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -170,6 +181,7 @@
 			children = (
 				37F86E3127B1107600E8A0CD /* StringExtension.swift */,
 				37F86E3B27B12F0E00E8A0CD /* ColorExtension.swift */,
+				37F86E4A27B16E2200E8A0CD /* ViewController+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -321,13 +333,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37F86E4927B1670F00E8A0CD /* NavigationController.swift in Sources */,
 				37F86E4027B14F5000E8A0CD /* Textfield.swift in Sources */,
+				37F86E4B27B16E2200E8A0CD /* ViewController+Ext.swift in Sources */,
 				37F86E4327B1512700E8A0CD /* Colors.swift in Sources */,
 				37F86E3A27B1128300E8A0CD /* Button.swift in Sources */,
 				3741BE2427AD336A00200BF9 /* SearchViewController.swift in Sources */,
 				3741BE2027AD336A00200BF9 /* AppDelegate.swift in Sources */,
 				37F86E3C27B12F0E00E8A0CD /* ColorExtension.swift in Sources */,
 				37F86E3227B1107600E8A0CD /* StringExtension.swift in Sources */,
+				37F86E4527B1645500E8A0CD /* TabbarController.swift in Sources */,
+				37F86E4727B164CB00E8A0CD /* FavoritesViewController.swift in Sources */,
 				3741BE2227AD336A00200BF9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,3 +10,5 @@
 "ButtonTitleLabel.GP" = "Github Profile";
 "ButtonTitleLabel.WS" = "Website";
 "Textfield.Label" = "Enter Username";
+"TabbarController.SearchVC.Title" = "Search";
+"TabbarController.FavoritesVC.Title" = "Favorites";
