@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class SearchViewController: UIViewController {
     
@@ -17,6 +18,8 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.isHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         self.hideKeyboardWhenTappedAround()
         setup()
         
@@ -31,15 +34,15 @@ class SearchViewController: UIViewController {
         logoImageView = UIImageView()
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.image = UIImage(named: "gh-logo")
+        logoImageView.contentMode = .scaleAspectFill
         logoImageView.layer.masksToBounds = true
         view.addSubview(logoImageView)
         
-        NSLayoutConstraint.activate([
-            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 105),
-            logoImageView.heightAnchor.constraint(equalToConstant: 220),
-            logoImageView.widthAnchor.constraint(equalToConstant: 220)
-        ])
+        logoImageView.snp.makeConstraints({ make in
+            make.width.height.equalTo(220)
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().multipliedBy(0.60)
+        })
     }
     
     private func configureTextfield() {
@@ -50,12 +53,12 @@ class SearchViewController: UIViewController {
         
         view.addSubview(textfield)
         
-        NSLayoutConstraint.activate([
-            textfield.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 31),
-            textfield.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textfield.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 53),
-            textfield.heightAnchor.constraint(equalToConstant: 62)
-        ])
+        textfield.snp.makeConstraints({ make in
+            make.height.equalTo(62)
+            make.leading.equalTo(31)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(logoImageView.snp.bottom).offset(53)
+        })
     }
     
     private func configureGetFollowersButton() {
@@ -64,12 +67,26 @@ class SearchViewController: UIViewController {
         followersButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(followersButton)
         
-        NSLayoutConstraint.activate([
-            followersButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 31),
-            followersButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            followersButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -36),
-            followersButton.heightAnchor.constraint(equalToConstant: 62)
-        ])
+        followersButton.snp.makeConstraints({ make in
+            make.height.equalTo(62)
+            make.leading.equalTo(31)
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().multipliedBy(1.60)
+        })
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
     }
 }
 

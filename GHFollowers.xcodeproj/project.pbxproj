@@ -15,6 +15,7 @@
 		3741BE3727AD336B00200BF9 /* GHFollowersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741BE3627AD336B00200BF9 /* GHFollowersTests.swift */; };
 		3741BE4127AD336B00200BF9 /* GHFollowersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741BE4027AD336B00200BF9 /* GHFollowersUITests.swift */; };
 		3741BE4327AD336B00200BF9 /* GHFollowersUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741BE4227AD336B00200BF9 /* GHFollowersUITestsLaunchTests.swift */; };
+		3749D9EA27B2746E0013803B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3749D9E927B2746E0013803B /* SnapKit */; };
 		37F86E3227B1107600E8A0CD /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F86E3127B1107600E8A0CD /* StringExtension.swift */; };
 		37F86E3627B110E600E8A0CD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37F86E3827B110E600E8A0CD /* Localizable.strings */; };
 		37F86E3A27B1128300E8A0CD /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F86E3927B1128300E8A0CD /* Button.swift */; };
@@ -74,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3749D9EA27B2746E0013803B /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +220,9 @@
 			dependencies = (
 			);
 			name = GHFollowers;
+			packageProductDependencies = (
+				3749D9E927B2746E0013803B /* SnapKit */,
+			);
 			productName = GHFollowers;
 			productReference = 3741BE1C27AD336A00200BF9 /* GHFollowers.app */;
 			productType = "com.apple.product-type.application";
@@ -290,6 +295,9 @@
 				Base,
 			);
 			mainGroup = 3741BE1327AD336A00200BF9;
+			packageReferences = (
+				3749D9E827B2746E0013803B /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 3741BE1D27AD336A00200BF9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -523,7 +531,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6BZ45VV3SM;
+				DEVELOPMENT_TEAM = 3FJFDFL9UR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GHFollowers/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -535,7 +543,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = adamcseke.GHFollowers;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adamcseke.GHFollowers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -550,7 +558,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6BZ45VV3SM;
+				DEVELOPMENT_TEAM = 3FJFDFL9UR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GHFollowers/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -562,7 +570,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = adamcseke.GHFollowers;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adamcseke.GHFollowers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -686,6 +694,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3749D9E827B2746E0013803B /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3749D9E927B2746E0013803B /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3749D9E827B2746E0013803B /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3741BE1427AD336A00200BF9 /* Project object */;
 }
