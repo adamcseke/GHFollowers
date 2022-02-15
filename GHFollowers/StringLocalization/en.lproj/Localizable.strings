@@ -9,6 +9,17 @@
 "ButtonTitleLabel.GF" = "Get Followers";
 "ButtonTitleLabel.GP" = "Github Profile";
 "ButtonTitleLabel.WS" = "Website";
+"ButtonTitleLabel.Alert" = "Ok";
 "Textfield.Label" = "Enter Username";
 "TabbarController.SearchVC.Title" = "Search";
 "TabbarController.FavoritesVC.Title" = "Favorites";
+"UserInfoViewController.CompanyView.TitleLabelOne" = "Company";
+"SearchViewController.AlertTitle" = "Something went wrong";
+"SearchViewController.MessageText" = "User not found";
+"UserInfoViewController.CreatedAt" = "Github since ";
+"InfoContentView.Followers.TitleLabelOne" = "Following";
+"InfoContentView.Followers.TitleLabelTwo" = "Followers";
+"InfoContentView.GithubProfile.TitleLabelOne" = "Public Repos";
+"InfoContentView.GithubProfile.TitleLabelTwo" = "Public Gists";
+"InfoContentView.Website.TitleLabelOne" = "Company";
+"EmptyView.EmptyLabel" = "This user doesn’t have any followers";

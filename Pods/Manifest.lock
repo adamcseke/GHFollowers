@@ -1,0 +1,16 @@
+PODS:
+  - TBEmptyDataSet (3.0)
+
+DEPENDENCIES:
+  - TBEmptyDataSet
+
+SPEC REPOS:
+  trunk:
+    - TBEmptyDataSet
+
+SPEC CHECKSUMS:
+  TBEmptyDataSet: 349add79095bf66d0d11ef9464edd1a8cf5354b5
+
+PODFILE CHECKSUM: 3860e6d8442a9101703ff77c89a889827f3e08bb
+
+COCOAPODS: 1.11.2
