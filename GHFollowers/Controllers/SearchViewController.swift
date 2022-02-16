@@ -18,6 +18,7 @@ class SearchViewController: UIViewController {
     
     private var followers: [Follower] = []
     private var username: String?
+    private var avatarURL: String?
     private var page: Int?
     
     
@@ -113,7 +114,7 @@ class SearchViewController: UIViewController {
     }
     
     @objc private func pushFollowersListVC() {
-        let followersListVC = FollowerListViewController(username: self.textfield.text ?? "")
+        let followersListVC = FollowerListViewController(username: username ?? "")
         self.navigationController?.pushViewController(followersListVC, animated: true)
     }
     

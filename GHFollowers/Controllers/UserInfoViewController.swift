@@ -16,10 +16,11 @@ class UserInfoViewController: UIViewController {
     private var scrollView: UIScrollView!
     private var contentView: UIView!
     
-    private var selectedFollower: Follower?
-    private var user: String?
+    private var selectedUser: User?
+    
     private var username: String?
     private var company: String?
+    private var blog: String?
     
     private var shadowView: ShadowView!
     private var userImageView: UIImageView!
@@ -33,9 +34,12 @@ class UserInfoViewController: UIViewController {
     private var followersView: InfoContentView!
     private var githubProfileView: InfoContentView!
     private var githubSinceLabel: UILabel!
+    private var alertView: AlertViewController!
     
-    init(selectedFollower: Follower) {
-        self.selectedFollower = selectedFollower
+    private var selected: Bool = false
+    
+    init(selectedUser: User) {
+        self.selectedUser = selectedUser
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -55,6 +59,8 @@ class UserInfoViewController: UIViewController {
         navigationController?.navigationBar.isOpaque = true
         navigationItem.largeTitleDisplayMode = .never
         tabBarController?.tabBar.isHidden = true
+        selected = isInTheFavorites(name: username ?? "")
+        changeFavoriteButton()
     }
     
     private func setup() {
@@ -72,7 +78,7 @@ class UserInfoViewController: UIViewController {
         configureGithubProfileView()
         configureFollowersView()
         configureGithubSinceLabel()
-        getUserInfo(user: selectedFollower?.login ?? "")
+        setInfos()
     }
     
     private func configureScrollView() {
@@ -94,42 +100,67 @@ class UserInfoViewController: UIViewController {
     
     private func configureViewController() {
         view.backgroundColor = .systemBackground
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(didTapNavBarButton))
     }
     
-    private func getUserInfo(user: String) {
-        RestClient.shared.getUserInfo(user: user) { result in
-            switch result {
-                
-            case .success(let user):
-                self.setInfos(userInfo: user)
-            case .failure(let error):
-                print(error.localizedDescription)
+    private func isInTheFavorites(name: String) -> Bool {
+        if DatabaseManager.main.getUsers().first(where: { $0.login == username?.lowercased() }) != nil {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    @objc private func didTapNavBarButton() {
+        if self.selected {
+            DatabaseManager.main.delete(entity: self.username?.lowercased() ?? "") { success in
+                self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
+                self.selected = false
+            }
+        } else {
+            DatabaseManager.main.insert(entity: self.username?.lowercased() ?? "", avatar: selectedUser?.avatarURL ?? "") { _ in
+                self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
+                self.selected = true
             }
         }
     }
     
-    private func setInfos(userInfo: User) {
-        self.username = userInfo.login
-        self.company = userInfo.htmlURL
-        self.userImageView.sd_setImage(with: URL(string: userInfo.avatarURL))
-        self.userLoginLabel.text = userInfo.login
-        self.userNameLabel.text = userInfo.name ?? ""
-        self.userLocationLabel.text = userInfo.location ?? "--"
-        self.userBioLabel.text = userInfo.bio ?? ""
-        if userInfo.company == nil {
+    private func changeFavoriteButton() {
+        if selected {
+            self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
+        } else {
+            self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
+        }
+    }
+    
+    private func setInfos() {
+        guard let selectedUser = selectedUser else {
+            return
+        }
+        
+        self.username = selectedUser.login
+        self.company = selectedUser.htmlURL
+        self.blog = selectedUser.blog
+        self.userImageView.sd_setImage(with: URL(string: selectedUser.avatarURL))
+        self.userLoginLabel.text = selectedUser.login
+        self.userNameLabel.text = selectedUser.name ?? ""
+        self.userLocationLabel.text = selectedUser.location ?? "--"
+        self.userBioLabel.text = selectedUser.bio ?? ""
+        if selectedUser.company == nil {
             self.companyView.isHidden = true
         }
         
-        self.companyView.setContentViewType(contentViewType: .website, infoLabelOneText: userInfo.company ?? "",
+        self.companyView.setContentViewType(contentViewType: .website, infoLabelOneText: selectedUser.company ?? "",
                                             infoLabelTwoText: "")
         
-        self.followersView.setContentViewType(contentViewType: .followers, infoLabelOneText: "\(userInfo.following)",
-                                              infoLabelTwoText: "\(userInfo.followers)")
+        self.followersView.setContentViewType(contentViewType: .followers, infoLabelOneText: "\(selectedUser.following)",
+                                              infoLabelTwoText: "\(selectedUser.followers)")
         
-        self.githubProfileView.setContentViewType(contentViewType: .githubProfile, infoLabelOneText: "\(userInfo.publicRepos)",
-                                                  infoLabelTwoText: "\(userInfo.publicGists)")
+        self.githubProfileView.setContentViewType(contentViewType: .githubProfile, infoLabelOneText: "\(selectedUser.publicRepos)",
+                                                  infoLabelTwoText: "\(selectedUser.publicGists)")
         
-        self.githubSinceLabel.text = "UserInfoViewController.CreatedAt".localized + "\(userInfo.dateResult)"
+        self.githubSinceLabel.text = "UserInfoViewController.CreatedAt".localized + "\(selectedUser.dateResult)"
     }
     
     private func configureShadowView() {
@@ -284,6 +315,14 @@ class UserInfoViewController: UIViewController {
             make.bottom.equalToSuperview().offset(-20)
         }
     }
+    
+    private func configureAlertView() {
+        alertView = AlertViewController(title: "UserInfoViewController.AlertTitle".localized, message: "UserInfoViewController.MessageText".localized)
+        alertView.modalPresentationStyle = .overFullScreen
+        alertView.modalTransitionStyle = .crossDissolve
+        alertView.providesPresentationContextTransitionStyle = true
+        navigationController?.present(alertView, animated: true)
+    }
 }
 
 extension UserInfoViewController: InfoContentViewDelegate {
@@ -295,10 +334,18 @@ extension UserInfoViewController: InfoContentViewDelegate {
             navigationController?.pushViewController(followerListVC, animated: true)
         case .githubProfile:
             if let url = URL(string: self.company ?? "") {
-                UIApplication.shared.open(url)
+                let safariViewController = SFSafariViewController(url: url)
+                navigationController?.present(safariViewController, animated: true, completion: nil)
             }
         case .website:
-            break
+            if self.blog == "" {
+                configureAlertView()
+            } else {
+                if let url = URL(string: self.blog ?? "") {
+                    let safariViewController = SFSafariViewController(url: url)
+                    navigationController?.present(safariViewController, animated: true, completion: nil)
+                }
+            }
         }
     }
 }

@@ -22,4 +22,7 @@
 "InfoContentView.GithubProfile.TitleLabelOne" = "Public Repos";
 "InfoContentView.GithubProfile.TitleLabelTwo" = "Public Gists";
 "InfoContentView.Website.TitleLabelOne" = "Company";
-"EmptyView.EmptyLabel" = "This user doesn’t have any followers";
+"EmptyFollowersView.EmptyLabel" = "This user doesn’t have any followers.";
+"EmptyFavoritesView.EmptyLabel" = "You don't have any favorites.";
+"UserInfoViewController.AlertTitle" = "Oops";
+"UserInfoViewController.MessageText" = "URL not found.";

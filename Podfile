@@ -17,5 +17,6 @@ target 'GHFollowers' do
   end
 
 pod 'TBEmptyDataSet'
+pod 'SQLite.swift'
 
 end

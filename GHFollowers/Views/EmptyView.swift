@@ -29,7 +29,6 @@ class EmptyView: UIView {
     
     private func configureEmptyLabel() {
         emptyLabel = UILabel()
-        emptyLabel.text = "EmptyView.EmptyLabel".localized
         emptyLabel.numberOfLines = 2
         emptyLabel.font = .systemFont(ofSize: 28, weight: .medium)
         emptyLabel.textColor = Colors.emptyLabel
@@ -38,7 +37,7 @@ class EmptyView: UIView {
         addSubview(emptyLabel)
         
         emptyLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
+            make.leading.equalTo(12)
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().multipliedBy(0.3)
             
@@ -57,5 +56,9 @@ class EmptyView: UIView {
             make.height.equalTo(emptyImageView.snp.width)
             
         }
+    }
+    
+    func bind(text: String) {
+        emptyLabel.text = text
     }
 }

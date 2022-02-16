@@ -7,23 +7,26 @@
 
 import Foundation
 
+enum GithubError: Error {
+    case wrongURL
+}
+
 final class RestClient {
     static let shared = RestClient()
     
     struct Constants {
         static let baseUrl = "https://api.github.com/"
-        static let apiKey = ""
     }
     
     private init() {}
 
     func request<T: Codable>(urlString: String, completion: @escaping (Result<T, Error>) -> Void) {
         guard let url = URL(string: urlString) else {
+            completion(.failure(GithubError.wrongURL))
             return
         }
-        var authUrl = url
-        authUrl.appendQueryParameters([:])
-        let task = URLSession.shared.dataTask(with: authUrl) { data, _, error in
+        
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
                 DispatchQueue.main.async {
                     completion(.failure(error))
@@ -52,6 +55,7 @@ final class RestClient {
     
     func request<T: Codable>(urlString: String, completion: @escaping (Result<[T], Error>) -> Void) {
         guard let url = URL(string: urlString) else {
+            completion(.failure(GithubError.wrongURL))
             return
         }
         var authUrl = url

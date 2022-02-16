@@ -28,11 +28,19 @@ class AlertViewController: UIViewController {
         super.init(coder: coder)
         setup()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        if ((touch?.view) != nil) {
+            dismiss(animated: true)
+        }
+    }
+    
     
     private func setup() {
         configureViewController()

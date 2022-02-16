@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 enum ButtonType {
     case followers
@@ -44,16 +45,11 @@ class Button: UIControl {
         buttonLabel.font = .systemFont(ofSize: 20)
         buttonLabel.textAlignment = .center
         
-        buttonLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         addSubview(buttonLabel)
         
-        NSLayoutConstraint.activate([
-            buttonLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            buttonLabel.topAnchor.constraint(equalTo: topAnchor),
-            buttonLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            buttonLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
-        ])
+        buttonLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     func setButtonType(buttonType: ButtonType) {

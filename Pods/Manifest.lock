@@ -1,16 +1,22 @@
 PODS:
+  - SQLite.swift (0.13.2):
+    - SQLite.swift/standard (= 0.13.2)
+  - SQLite.swift/standard (0.13.2)
   - TBEmptyDataSet (3.0)
 
 DEPENDENCIES:
+  - SQLite.swift
   - TBEmptyDataSet
 
 SPEC REPOS:
   trunk:
+    - SQLite.swift
     - TBEmptyDataSet
 
 SPEC CHECKSUMS:
+  SQLite.swift: 4fc2be46c36392e3b87afe6fe7f1801c1daa07ef
   TBEmptyDataSet: 349add79095bf66d0d11ef9464edd1a8cf5354b5
 
-PODFILE CHECKSUM: 3860e6d8442a9101703ff77c89a889827f3e08bb
+PODFILE CHECKSUM: 72ce6627936b88107867f6f6342a6b986bd02e5d
 
 COCOAPODS: 1.11.2

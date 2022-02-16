@@ -20,7 +20,7 @@ struct User: Codable {
     let followers: Int
     let following: Int
     let createdAt: Date
-    
+    let blog: String?
     
     enum CodingKeys: String, CodingKey {
         case login
@@ -35,6 +35,7 @@ struct User: Codable {
         case followers
         case following
         case createdAt = "created_at"
+        case blog
     }
 }
 

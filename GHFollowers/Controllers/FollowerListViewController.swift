@@ -16,13 +16,14 @@ class FollowerListViewController: UIViewController {
     
     private var followers: [Follower] = [] {
         didSet {
-            
             collectionView.reloadData()
         }
     }
-    
+    private var user: User?
     private var username: String?
     private var page: Int?
+    
+    private var selected: Bool = false
     
     private var searchVC: SearchViewController = SearchViewController()
     
@@ -45,6 +46,8 @@ class FollowerListViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         tabBarController?.tabBar.isHidden = true
+        selected = isInTheFavorites(name: username ?? "")
+        changeFavoriteButton()
     }
     
     private func setup() {
@@ -54,6 +57,14 @@ class FollowerListViewController: UIViewController {
         getFollowersData()
     }
     
+    private func isInTheFavorites(name: String) -> Bool {
+        if DatabaseManager.main.getUsers().first(where: { $0.login == username?.lowercased() }) != nil {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     private func getFollowers(user: String, page: Int) {
         RestClient.shared.getFollowers(user: user, page: page) { result in
             switch result {
@@ -61,8 +72,28 @@ class FollowerListViewController: UIViewController {
             case .success(let follower):
                 self.followers = follower
             case .failure(let error):
+                if let error = error as? GithubError {
+                    switch error {
+                    case .wrongURL:
+                        print("Wrong url")
+                    }
+                    
+                }
                 print(error.localizedDescription)
                 return
+            }
+        }
+    }
+    
+    private func getUserInfo(user: String, completion: @escaping () -> ()) {
+        RestClient.shared.getUserInfo(user: user) { result in
+            switch result {
+                
+            case .success(let user):
+                self.user = user
+                completion()
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
@@ -74,11 +105,36 @@ class FollowerListViewController: UIViewController {
     private func configureNavigationController() {
         navigationItem.title = username
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(didTapNavBarButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(didTapGetUserInfoButton))
     }
     
-    @objc private func didTapNavBarButton() {
-        print("button tapped")
+    @objc private func didTapGetUserInfoButton() {
+        getUserInfo(user: username ?? "") {
+            guard let user = self.user else {
+                return
+            }
+            
+            if self.selected {
+                DatabaseManager.main.delete(entity: self.username ?? "") { success in
+                    self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
+                    self.selected = false
+                }
+            } else {
+                DatabaseManager.main.insert(entity: self.username ?? "", avatar: user.avatarURL) { _ in
+                    self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
+                    self.selected = true
+                }
+            }
+        }
+        
+    }
+    
+    private func changeFavoriteButton() {
+        if selected {
+            self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
+        } else {
+            self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
+        }
     }
     
     private func configureViewController() {
@@ -113,8 +169,14 @@ class FollowerListViewController: UIViewController {
 
 extension FollowerListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedUserVC = UserInfoViewController(selectedFollower: followers[indexPath.row])
-        navigationController?.pushViewController(selectedUserVC, animated: true)
+        let selectedUser = followers[indexPath.row]
+        getUserInfo(user: selectedUser.login) {
+            guard let user = self.user else {
+                return
+            }
+            let selectedUserVC = UserInfoViewController(selectedUser: user)
+            self.navigationController?.pushViewController(selectedUserVC, animated: true)
+        }
     }
 }
 
@@ -143,6 +205,8 @@ extension FollowerListViewController: TBEmptyDataSetDelegate {
 extension FollowerListViewController: TBEmptyDataSetDataSource {
     
     func customViewForEmptyDataSet(in scrollView: UIScrollView) -> UIView? {
-        return EmptyView(frame: scrollView.frame)
+        let view = EmptyView(frame: scrollView.frame)
+        view.bind(text: "EmptyFollowersView.EmptyLabel".localized)
+        return view
     }
 }

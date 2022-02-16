@@ -33,6 +33,7 @@
 		377D79AE27B564D800E7B4FE /* SDCAlertView in Frameworks */ = {isa = PBXBuildFile; productRef = 377D79AD27B564D800E7B4FE /* SDCAlertView */; };
 		37973F3C27B673EE00B2AC24 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37973F3B27B673EE00B2AC24 /* EmptyView.swift */; };
 		37973F3E27B6A4EE00B2AC24 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37973F3D27B6A4EE00B2AC24 /* AlertViewController.swift */; };
+		37E02E7327BBB9EE004B3597 /* BoolCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E02E7227BBB9EE004B3597 /* BoolCompletion.swift */; };
 		37F86E3227B1107600E8A0CD /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F86E3127B1107600E8A0CD /* StringExtension.swift */; };
 		37F86E3627B110E600E8A0CD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37F86E3827B110E600E8A0CD /* Localizable.strings */; };
 		37F86E3A27B1128300E8A0CD /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F86E3927B1128300E8A0CD /* Button.swift */; };
@@ -43,6 +44,7 @@
 		37F86E4727B164CB00E8A0CD /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F86E4627B164CB00E8A0CD /* FavoritesViewController.swift */; };
 		37F86E4927B1670F00E8A0CD /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F86E4827B1670F00E8A0CD /* NavigationController.swift */; };
 		37F86E4B27B16E2200E8A0CD /* ViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F86E4A27B16E2200E8A0CD /* ViewController+Ext.swift */; };
+		37FD6B1F27BBA7B400C2DED1 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD6B1E27BBA7B400C2DED1 /* DatabaseManager.swift */; };
 		46B32E39767547085C4E7E71 /* Pods_GHFollowers_GHFollowersUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAAFB336C93F1F638D4C66E /* Pods_GHFollowers_GHFollowersUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +94,7 @@
 		377D79A627B551C100E7B4FE /* FavoritesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCell.swift; sourceTree = "<group>"; };
 		37973F3B27B673EE00B2AC24 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		37973F3D27B6A4EE00B2AC24 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		37E02E7227BBB9EE004B3597 /* BoolCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolCompletion.swift; sourceTree = "<group>"; };
 		37F86E3127B1107600E8A0CD /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		37F86E3727B110E600E8A0CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37F86E3927B1128300E8A0CD /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
@@ -102,6 +105,7 @@
 		37F86E4627B164CB00E8A0CD /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		37F86E4827B1670F00E8A0CD /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		37F86E4A27B16E2200E8A0CD /* ViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Ext.swift"; sourceTree = "<group>"; };
+		37FD6B1E27BBA7B400C2DED1 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		51D3CB988B7EBDB4DB768E77 /* Pods-GHFollowers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHFollowers.release.xcconfig"; path = "Target Support Files/Pods-GHFollowers/Pods-GHFollowers.release.xcconfig"; sourceTree = "<group>"; };
 		AFAAFB336C93F1F638D4C66E /* Pods_GHFollowers_GHFollowersUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GHFollowers_GHFollowersUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1F17B7E0D48E8CB8C40744B /* Pods_GHFollowersTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GHFollowersTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +170,7 @@
 		3741BE1E27AD336A00200BF9 /* GHFollowers */ = {
 			isa = PBXGroup;
 			children = (
+				37E02E7127BBB9DB004B3597 /* Constants */,
 				375128E827B3E07D0034594A /* Database */,
 				3749D9F227B27C9D0013803B /* Models */,
 				3749D9EB27B27A0B0013803B /* APICaller */,
@@ -221,8 +226,17 @@
 		375128E827B3E07D0034594A /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				37FD6B1E27BBA7B400C2DED1 /* DatabaseManager.swift */,
 			);
 			path = Database;
+			sourceTree = "<group>";
+		};
+		37E02E7127BBB9DB004B3597 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				37E02E7227BBB9EE004B3597 /* BoolCompletion.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		37F86E2927B10E0800E8A0CD /* Views */ = {
@@ -561,6 +575,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37F86E4927B1670F00E8A0CD /* NavigationController.swift in Sources */,
+				37E02E7327BBB9EE004B3597 /* BoolCompletion.swift in Sources */,
 				375128EE27B3E97B0034594A /* UserInfoViewController.swift in Sources */,
 				3749D9EF27B27A570013803B /* URLExtension.swift in Sources */,
 				3749D9F827B29FF00013803B /* FollowerListViewController.swift in Sources */,
@@ -571,6 +586,7 @@
 				377D79A727B551C100E7B4FE /* FavoritesCell.swift in Sources */,
 				37F86E4B27B16E2200E8A0CD /* ViewController+Ext.swift in Sources */,
 				37973F3E27B6A4EE00B2AC24 /* AlertViewController.swift in Sources */,
+				37FD6B1F27BBA7B400C2DED1 /* DatabaseManager.swift in Sources */,
 				37F86E4327B1512700E8A0CD /* Colors.swift in Sources */,
 				37F86E3A27B1128300E8A0CD /* Button.swift in Sources */,
 				375128F427B408EF0034594A /* InfoContentView.swift in Sources */,
@@ -764,7 +780,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 48KF4TL849;
+				DEVELOPMENT_TEAM = 6BZ45VV3SM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GHFollowers/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -772,6 +788,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -793,7 +810,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 48KF4TL849;
+				DEVELOPMENT_TEAM = 6BZ45VV3SM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GHFollowers/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -801,6 +818,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

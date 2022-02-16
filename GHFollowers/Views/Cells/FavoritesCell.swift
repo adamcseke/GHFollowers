@@ -36,6 +36,9 @@ class FavoritesCell: UITableViewCell {
         usernameLabel = UILabel()
         addSubview(userImageView)
         addSubview(usernameLabel)
+        
+        userImageView.layer.cornerRadius = 12
+        userImageView.layer.masksToBounds = true
 
         accessoryType = .disclosureIndicator
         
