@@ -20,7 +20,6 @@ class UserInfoViewController: UIViewController {
     
     private var username: String?
     private var company: String?
-    private var blog: String?
     
     private var shadowView: ShadowView!
     private var userImageView: UIImageView!
@@ -36,7 +35,9 @@ class UserInfoViewController: UIViewController {
     private var githubSinceLabel: UILabel!
     private var alertView: AlertViewController!
     
-    private var selected: Bool = false
+    private var isFavorite: Bool = false
+    private var deleted: Bool = true
+    private var inserted: Bool = false
     
     init(selectedUser: User) {
         self.selectedUser = selectedUser
@@ -59,8 +60,8 @@ class UserInfoViewController: UIViewController {
         navigationController?.navigationBar.isOpaque = true
         navigationItem.largeTitleDisplayMode = .never
         tabBarController?.tabBar.isHidden = true
-        selected = isInTheFavorites(name: username ?? "")
-        changeFavoriteButton()
+        isFavorite = isInTheFavorites(name: username ?? "")
+        changeFavoriteButton(isFavorite: isFavorite)
     }
     
     private func setup() {
@@ -79,6 +80,7 @@ class UserInfoViewController: UIViewController {
         configureFollowersView()
         configureGithubSinceLabel()
         setInfos()
+        changeFavoriteButton(isFavorite: isFavorite)
     }
     
     private func configureScrollView() {
@@ -104,33 +106,17 @@ class UserInfoViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(didTapNavBarButton))
     }
     
-    private func isInTheFavorites(name: String) -> Bool {
-        if DatabaseManager.main.getUsers().first(where: { $0.login == username?.lowercased() }) != nil {
-            return true
-        } else {
-            return false
-        }
-    }
-    
     @objc private func didTapNavBarButton() {
-        if self.selected {
-            DatabaseManager.main.delete(entity: self.username?.lowercased() ?? "") { success in
-                self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
-                self.selected = false
+        if self.isFavorite {
+            DatabaseManager.main.delete(username: self.username?.lowercased() ?? "") { _ in
+                self.isFavorite = false
+                self.changeFavoriteButton(isFavorite: self.isFavorite)
             }
         } else {
-            DatabaseManager.main.insert(entity: self.username?.lowercased() ?? "", avatar: selectedUser?.avatarURL ?? "") { _ in
-                self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
-                self.selected = true
+            DatabaseManager.main.insert(username: self.username?.lowercased() ?? "", avatar: selectedUser?.avatarURL ?? "") { _ in
+                self.isFavorite = true
+                self.changeFavoriteButton(isFavorite: self.isFavorite)
             }
-        }
-    }
-    
-    private func changeFavoriteButton() {
-        if selected {
-            self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
-        } else {
-            self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
         }
     }
     
@@ -141,7 +127,6 @@ class UserInfoViewController: UIViewController {
         
         self.username = selectedUser.login
         self.company = selectedUser.htmlURL
-        self.blog = selectedUser.blog
         self.userImageView.sd_setImage(with: URL(string: selectedUser.avatarURL))
         self.userLoginLabel.text = selectedUser.login
         self.userNameLabel.text = selectedUser.name ?? ""
@@ -167,13 +152,21 @@ class UserInfoViewController: UIViewController {
         shadowView = ShadowView()
         contentView.addSubview(shadowView)
         
-        shadowView.snp.makeConstraints { make in
-            make.leading.equalTo(28)
-            make.top.equalTo(20)
-            make.height.width.equalTo(90)
+        if UIDevice.Devices.iPad {
+            shadowView.snp.makeConstraints { make in
+                make.centerX.equalToSuperview().multipliedBy(0.5)
+                make.top.equalTo(150)
+                make.height.width.equalTo(90)
+            }
+        } else {
+            shadowView.snp.makeConstraints { make in
+                make.leading.equalTo(28)
+                make.top.equalTo(20)
+                make.height.width.equalTo(90)
+            }
         }
     }
-    
+        
     private func configureUserImageView() {
         userImageView = UIImageView()
         userImageView.layer.cornerRadius = 12
@@ -182,9 +175,7 @@ class UserInfoViewController: UIViewController {
         shadowView.addSubview(userImageView)
         
         userImageView.snp.makeConstraints { make in
-            make.centerX.equalTo(shadowView.snp.centerX)
-            make.centerY.equalTo(shadowView.snp.centerY)
-            make.height.width.equalTo(shadowView.snp.width)
+            make.edges.equalToSuperview()
         }
     }
     
@@ -249,8 +240,8 @@ class UserInfoViewController: UIViewController {
         
         userBioLabel.snp.makeConstraints { make in
             make.top.equalTo(userImageView.snp.bottom).offset(16)
-            make.leading.equalTo(34)
-            make.trailing.equalTo(-16)
+            make.leading.equalTo(userImageView.snp.leading).offset(6)
+            make.centerX.equalToSuperview()
         }
     }
     
@@ -264,8 +255,12 @@ class UserInfoViewController: UIViewController {
         
         infoStackView.snp.makeConstraints { make in
             make.top.equalTo(userBioLabel.snp.bottom).offset(25)
-            make.leading.equalTo(contentView)
-            make.trailing.equalTo(contentView)
+            if UIDevice.Devices.iPad {
+                make.leading.equalTo(contentView).offset(140)
+            } else {
+                make.leading.equalTo(contentView)
+            }
+            make.centerX.equalToSuperview()
         }
     }
     
@@ -338,13 +333,11 @@ extension UserInfoViewController: InfoContentViewDelegate {
                 navigationController?.present(safariViewController, animated: true, completion: nil)
             }
         case .website:
-            if self.blog == "" {
+            if self.selectedUser?.blog == "" {
                 configureAlertView()
             } else {
-                if let url = URL(string: self.blog ?? "") {
-                    let safariViewController = SFSafariViewController(url: url)
-                    navigationController?.present(safariViewController, animated: true, completion: nil)
-                }
+                URLString.urlString = self.selectedUser?.blog
+                openUserWebsite()
             }
         }
     }

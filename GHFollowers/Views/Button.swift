@@ -8,13 +8,6 @@
 import UIKit
 import SnapKit
 
-enum ButtonType {
-    case followers
-    case githubProfile
-    case website
-    case alert
-}
-
 class Button: UIControl {
     
     private var buttonLabel: UILabel!
@@ -44,6 +37,7 @@ class Button: UIControl {
         buttonLabel.textColor = .white
         buttonLabel.font = .systemFont(ofSize: 20)
         buttonLabel.textAlignment = .center
+        buttonLabel.font = .systemFont(ofSize: 20, weight: .bold)
         
         addSubview(buttonLabel)
         
@@ -52,29 +46,9 @@ class Button: UIControl {
         }
     }
     
-    func setButtonType(buttonType: ButtonType) {
-        
-        switch buttonType {
-            
-        case .followers:
-            backgroundColor = Colors.green
-            buttonLabel.text = "ButtonTitleLabel.GF".localized
-            buttonLabel.font = .systemFont(ofSize: 20, weight: .medium)
-            
-        case .githubProfile:
-            backgroundColor = Colors.purple
-            buttonLabel.text = "ButtonTitleLabel.GP".localized
-            buttonLabel.font = .systemFont(ofSize: 20, weight: .bold)
-            
-        case .website:
-            backgroundColor = Colors.red
-            buttonLabel.text = "ButtonTitleLabel.WS".localized
-            buttonLabel.font = .systemFont(ofSize: 20, weight: .bold)
-            
-        case .alert:
-            backgroundColor = Colors.red
-            buttonLabel.text = "ButtonTitleLabel.Alert".localized
-            buttonLabel.font = .systemFont(ofSize: 20, weight: .bold)
-        }
+    func bind(buttonBackgorundColor: UIColor, buttonLabelText: String, font: UIFont) {
+        backgroundColor = buttonBackgorundColor
+        buttonLabel.text = buttonLabelText
+        buttonLabel.font = font
     }
 }

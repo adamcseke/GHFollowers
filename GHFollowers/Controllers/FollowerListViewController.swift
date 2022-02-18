@@ -23,7 +23,9 @@ class FollowerListViewController: UIViewController {
     private var username: String?
     private var page: Int?
     
-    private var selected: Bool = false
+    private var isFavorite: Bool = false
+    private var deleted: Bool = true
+    private var inserted: Bool = false
     
     private var searchVC: SearchViewController = SearchViewController()
     
@@ -46,8 +48,8 @@ class FollowerListViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         tabBarController?.tabBar.isHidden = true
-        selected = isInTheFavorites(name: username ?? "")
-        changeFavoriteButton()
+        isFavorite = isInTheFavorites(name: username ?? "")
+        changeFavoriteButton(isFavorite: isFavorite)
     }
     
     private func setup() {
@@ -55,14 +57,7 @@ class FollowerListViewController: UIViewController {
         configureCollectionView()
         configureNavigationController()
         getFollowersData()
-    }
-    
-    private func isInTheFavorites(name: String) -> Bool {
-        if DatabaseManager.main.getUsers().first(where: { $0.login == username?.lowercased() }) != nil {
-            return true
-        } else {
-            return false
-        }
+        changeFavoriteButton(isFavorite: isFavorite)
     }
     
     private func getFollowers(user: String, page: Int) {
@@ -105,7 +100,7 @@ class FollowerListViewController: UIViewController {
     private func configureNavigationController() {
         navigationItem.title = username
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(didTapGetUserInfoButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: ""), style: .plain, target: self, action: #selector(didTapGetUserInfoButton))
     }
     
     @objc private func didTapGetUserInfoButton() {
@@ -114,27 +109,19 @@ class FollowerListViewController: UIViewController {
                 return
             }
             
-            if self.selected {
-                DatabaseManager.main.delete(entity: self.username ?? "") { success in
-                    self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
-                    self.selected = false
+            if self.isFavorite {
+                DatabaseManager.main.delete(username: self.username ?? "") { _ in
+                    self.isFavorite = false
+                    self.changeFavoriteButton(isFavorite: self.isFavorite)
                 }
             } else {
-                DatabaseManager.main.insert(entity: self.username ?? "", avatar: user.avatarURL) { _ in
-                    self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
-                    self.selected = true
+                DatabaseManager.main.insert(username: self.username ?? "", avatar: user.avatarURL) { _ in
+                    self.isFavorite = true
+                    self.changeFavoriteButton(isFavorite: self.isFavorite)
                 }
             }
         }
         
-    }
-    
-    private func changeFavoriteButton() {
-        if selected {
-            self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
-        } else {
-            self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
-        }
     }
     
     private func configureViewController() {

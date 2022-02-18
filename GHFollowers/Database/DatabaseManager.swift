@@ -76,10 +76,10 @@ class DatabaseManager {
         }
     }
     
-    func insert(entity: String, avatar: String, completion: BoolCompletition?) {
+    func insert(username: String, avatar: String, completion: BoolCompletition?) {
         self.openIfNeeded()
         let insert = user.insert(
-            login <- entity.lowercased(),
+            login <- username.lowercased(),
             avatarURL <- avatar
         )
         
@@ -111,9 +111,9 @@ class DatabaseManager {
         return users
     }
     
-    func delete(entity: String, completion: BoolCompletition?) {
+    func delete(username: String, completion: BoolCompletition?) {
         self.openIfNeeded()
-        let item = self.user.filter(login == entity)
+        let item = self.user.filter(login == username)
         do {
             try database?.run(item.delete())
             print("User deleted from database...")
@@ -123,5 +123,4 @@ class DatabaseManager {
             completion?(false)
         }
     }
-    
 }

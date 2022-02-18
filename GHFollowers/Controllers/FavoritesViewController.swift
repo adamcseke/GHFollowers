@@ -57,7 +57,6 @@ class FavoritesViewController: UIViewController {
     
     private func getFavorites() {
         favorites = DatabaseManager.main.getUsers()
-        print(favorites)
     }
     
     private func configureTableView() {
@@ -73,7 +72,7 @@ class FavoritesViewController: UIViewController {
         view.addSubview(tableView)
         
         tableView.snp.makeConstraints { make in
-            make.top.bottom.leading.trailing.equalToSuperview()
+            make.edges.equalToSuperview()
         }
     }
 }

@@ -71,6 +71,7 @@ class AlertViewController: UIViewController {
         titleLabel = UILabel()
         titleLabel.textColor = Colors.alertTitle
         titleLabel.textAlignment = .center
+        titleLabel.numberOfLines = 2
         titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
         titleLabel.text = alertTitle ?? ""
         containerView.addSubview(titleLabel)
@@ -100,7 +101,7 @@ class AlertViewController: UIViewController {
     
     private func configureActionButton() {
         actionButton = Button()
-        actionButton.setButtonType(buttonType: .alert)
+        actionButton.bind(buttonBackgorundColor: Colors.red, buttonLabelText: "ButtonTitleLabel.Alert".localized, font: .systemFont(ofSize: 20, weight: .bold))
         actionButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         containerView.addSubview(actionButton)
         

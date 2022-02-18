@@ -1,0 +1,28 @@
+/* 
+  Localizable.strings
+  GHFollowers
+
+  Created by Adam Cseke on 2022. 02. 17..
+  
+*/
+
+"ButtonTitleLabel.GF" = "Követők keresése";
+"ButtonTitleLabel.GP" = "Github Profil";
+"ButtonTitleLabel.WS" = "Weboldal";
+"ButtonTitleLabel.Alert" = "Oké";
+"Textfield.Label" = "Felhasználónév";
+"TabbarController.SearchVC.Title" = "Keresés";
+"TabbarController.FavoritesVC.Title" = "Kedvencek";
+"UserInfoViewController.CompanyView.TitleLabelOne" = "Vállalat";
+"SearchViewController.AlertTitle" = "Keresés nem lehetséges";
+"SearchViewController.MessageText" = "Felhasználó nem található";
+"UserInfoViewController.CreatedAt" = "Github regisztráció ";
+"InfoContentView.Followers.TitleLabelOne" = "Követések";
+"InfoContentView.Followers.TitleLabelTwo" = "Követők";
+"InfoContentView.GithubProfile.TitleLabelOne" = "Adattárak";
+"InfoContentView.GithubProfile.TitleLabelTwo" = "Kódok";
+"InfoContentView.Website.TitleLabelOne" = "Vállalat";
+"EmptyFollowersView.EmptyLabel" = "A felhasználónak nincsenek követői.";
+"EmptyFavoritesView.EmptyLabel" = "Nincsenek kedvenceid.";
+"UserInfoViewController.AlertTitle" = "Upsz";
+"UserInfoViewController.MessageText" = "URL nem található.";

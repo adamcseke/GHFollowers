@@ -23,14 +23,11 @@ class InfoContentView: UIView {
     weak var customButtonDelegate: InfoContentViewDelegate?
     private var viewType: ContentViewType?
     
-    private var imageViewOne: UIImageView!
-    private var titleLabelOne: UILabel!
-    private var infoLabelOne: UILabel!
-    private var imageViewTwo: UIImageView!
-    private var titleLabelTwo: UILabel!
-    private var infoLabelTwo: UILabel!
-    private var companyImageBackgroudnView: UIView!
+    private var companyImageBackgroundView: UIView!
     private var companyImageView: UIImageView!
+    private var infoStackView: UIStackView!
+    private var infoViewOne: InfoView!
+    private var infoViewTwo: InfoView!
     
     private let boldConfiguration = UIImage.SymbolConfiguration(weight: .bold)
     private let mediumConfiguration = UIImage.SymbolConfiguration(weight: .medium)
@@ -49,17 +46,13 @@ class InfoContentView: UIView {
     
     private func setup() {
         configureView()
-        configureImageViewOne()
-        configureTitleLabelOne()
-        configureInfoLabelOne()
-        configureImageViewTwo()
-        configureTitleLabelTwo()
-        configureInfoLabelTwo()
         configureButton()
+        configureInfoStackView()
+        configureInfoViewOne()
+        configureInfoViewTwo()
         configureCompanyImageView()
     }
-    
-    
+
     private func configureView() {
         backgroundColor = Colors.contentViewsColors
         layer.cornerRadius = 20
@@ -69,78 +62,40 @@ class InfoContentView: UIView {
         }
     }
     
-    private func configureImageViewOne() {
-        imageViewOne = UIImageView()
-        imageViewOne.tintColor = Colors.userInfoLabels
+    private func configureInfoStackView() {
+        infoStackView = UIStackView()
+        infoStackView.axis = .horizontal
+        infoStackView.alignment = .fill
+        infoStackView.distribution = .equalCentering
+        addSubview(infoStackView)
         
-        addSubview(imageViewOne)
-        
-        imageViewOne.snp.makeConstraints { make in
-            make.centerX.equalToSuperview().multipliedBy(0.25)
-            make.top.equalTo(17)
+        infoStackView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(23.5)
+            make.top.equalToSuperview().offset(17)
+            make.bottom.equalTo(button.snp.top).offset(-24)
+            make.centerX.equalToSuperview()
         }
     }
     
-    private func configureTitleLabelOne() {
-        titleLabelOne = UILabel()
-        titleLabelOne.font = .systemFont(ofSize: 18, weight: .bold)
-        titleLabelOne.textColor = Colors.userInfoLabels
-        addSubview(titleLabelOne)
+    private func configureInfoViewOne() {
+        infoViewOne = InfoView()
+        infoStackView.addArrangedSubview(infoViewOne)
         
-        titleLabelOne.snp.makeConstraints { make in
-            make.leading.equalTo(imageViewOne.snp.trailing).offset(5.5)
-            make.centerY.equalTo(imageViewOne.snp.centerY)
-            make.trailing.equalTo(snp.centerX)
-        }
-    }
-    
-    private func configureInfoLabelOne() {
-        infoLabelOne = UILabel()
-        infoLabelOne.textColor = Colors.userInfoLabels
-        infoLabelOne.textAlignment = .center
-        infoLabelOne.font = .systemFont(ofSize: 18, weight: .bold)
-        addSubview(infoLabelOne)
-        
-        infoLabelOne.snp.makeConstraints { make in
+        infoViewOne.snp.makeConstraints { make in
             make.leading.equalToSuperview()
-            make.centerX.equalToSuperview().multipliedBy(0.5)
-            make.top.equalTo(titleLabelOne.snp.bottom).offset(8)
+            make.trailing.equalTo(snp.centerX)
+            make.bottom.equalToSuperview()
         }
     }
     
-    private func configureImageViewTwo() {
-        imageViewTwo = UIImageView()
-        imageViewTwo.tintColor = Colors.userInfoLabels
-        addSubview(imageViewTwo)
+    private func configureInfoViewTwo() {
+        infoViewTwo = InfoView()
+        infoStackView.addArrangedSubview(infoViewTwo)
         
-        imageViewTwo.snp.makeConstraints { make in
-            make.centerX.equalToSuperview().multipliedBy(1.20)
-            make.top.equalTo(17)
-        }
-    }
-    
-    private func configureTitleLabelTwo() {
-        titleLabelTwo = UILabel()
-        titleLabelTwo.font = .systemFont(ofSize: 18, weight: .bold)
-        titleLabelTwo.textColor = Colors.userInfoLabels
-        addSubview(titleLabelTwo)
-        
-        titleLabelTwo.snp.makeConstraints { make in
-            make.leading.equalTo(imageViewTwo.snp.trailing).offset(5.5)
-            make.centerY.equalTo(imageViewTwo.snp.centerY)
-            make.trailing.equalTo(-21)
-        }
-    }
-    
-    private func configureInfoLabelTwo() {
-        infoLabelTwo = UILabel()
-        infoLabelTwo.font = .systemFont(ofSize: 18, weight: .bold)
-        infoLabelTwo.textColor = Colors.userInfoLabels
-        addSubview(infoLabelTwo)
-        
-        infoLabelTwo.snp.makeConstraints { make in
-            make.centerX.equalToSuperview().multipliedBy(1.50)
-            make.top.equalTo(titleLabelTwo.snp.bottom).offset(8)
+        infoViewTwo.snp.makeConstraints { make in
+            make.leading.equalTo(infoViewOne.snp.trailing)
+            
+            make.bottom.equalToSuperview()
         }
     }
     
@@ -166,21 +121,21 @@ class InfoContentView: UIView {
 
     private func configureCompanyImageView() {
         companyImageView = UIImageView()
-        companyImageBackgroudnView = UIView()
-        addSubview(companyImageBackgroudnView)
-        companyImageBackgroudnView.addSubview(companyImageView)
+        companyImageBackgroundView = UIView()
+        addSubview(companyImageBackgroundView)
+        companyImageBackgroundView.addSubview(companyImageView)
         
-        companyImageBackgroudnView.layer.cornerRadius = 13
+        companyImageBackgroundView.layer.cornerRadius = 13
         
-        companyImageBackgroudnView.snp.makeConstraints { make in
+        companyImageBackgroundView.snp.makeConstraints { make in
             make.top.equalTo(13)
             make.trailing.equalTo(-25)
             make.height.width.equalTo(60)
         }
         
         companyImageView.snp.makeConstraints { make in
-            make.centerX.equalTo(companyImageBackgroudnView.snp.centerX)
-            make.centerY.equalTo(companyImageBackgroudnView.snp.centerY)
+            make.centerX.equalTo(companyImageBackgroundView.snp.centerX)
+            make.centerY.equalTo(companyImageBackgroundView.snp.centerY)
         }
     }
     
@@ -190,68 +145,56 @@ class InfoContentView: UIView {
         switch contentViewType {
             
         case .followers:
-            button.setButtonType(buttonType: .followers)
+            button.bind(buttonBackgorundColor: Colors.green, buttonLabelText: "ButtonTitleLabel.GF".localized, font: .systemFont(ofSize: 20, weight: .bold))
             
-            infoLabelOne.text = infoLabelOneText
-            infoLabelTwo.text = infoLabelTwoText
             
-            imageViewOne.image = UIImage(systemName: "heart", withConfiguration: boldConfiguration)
-            imageViewOne.snp.makeConstraints { make in
-                make.height.equalTo(24)
-                make.width.equalTo(25)
-            }
-            titleLabelOne.text = "InfoContentView.Followers.TitleLabelOne".localized
-            titleLabelTwo.text = "InfoContentView.Followers.TitleLabelTwo".localized
             
-            imageViewTwo.image = UIImage(systemName: "person.2", withConfiguration: boldConfiguration)
-            imageViewTwo.snp.makeConstraints { make in
-                make.height.equalTo(24)
-                make.width.equalTo(33)
-            }
+            infoViewOne.bind(image: UIImage(systemName: "heart", withConfiguration: boldConfiguration),
+                          titleLabelText: "InfoContentView.Followers.TitleLabelOne".localized,
+                          infoLabelText: infoLabelOneText,
+                          infoLabelFont: .systemFont(ofSize: 18, weight: .bold),
+                             infoLabelTextAlignment: .center)
             
-            companyImageBackgroudnView.backgroundColor = .clear
-            companyImageView.image = UIImage(systemName: "")
+            infoViewTwo.bind(image: UIImage(systemName: "person.2", withConfiguration: boldConfiguration),
+                             titleLabelText: "InfoContentView.Followers.TitleLabelTwo".localized,
+                             infoLabelText: infoLabelTwoText,
+                             infoLabelFont: .systemFont(ofSize: 18, weight: .bold),
+                             infoLabelTextAlignment: .center)
+            
+            companyImageBackgroundView.isHidden = true
             
         case .githubProfile:
-            button.setButtonType(buttonType: .githubProfile)
+            button.bind(buttonBackgorundColor: Colors.purple, buttonLabelText: "ButtonTitleLabel.GP".localized, font: .systemFont(ofSize: 20, weight: .bold))
             
-            infoLabelOne.text = infoLabelOneText
-            infoLabelTwo.text = infoLabelTwoText
+            infoViewOne.bind(image: UIImage(systemName: "folder", withConfiguration: boldConfiguration),
+                          titleLabelText: "InfoContentView.GithubProfile.TitleLabelOne".localized,
+                          infoLabelText: infoLabelOneText,
+                          infoLabelFont: .systemFont(ofSize: 18, weight: .bold),
+                             infoLabelTextAlignment: .center)
             
-            imageViewOne.image = UIImage(systemName: "folder", withConfiguration: boldConfiguration)
+            infoViewTwo.bind(image: UIImage(systemName: "text.alignleft", withConfiguration: boldConfiguration),
+                             titleLabelText: "InfoContentView.GithubProfile.TitleLabelTwo".localized,
+                             infoLabelText: infoLabelTwoText,
+                             infoLabelFont: .systemFont(ofSize: 18, weight: .bold),
+                             infoLabelTextAlignment: .center)
             
-            imageViewOne.snp.makeConstraints { make in
-                make.height.equalTo(24)
-                make.width.equalTo(29)
-            }
-            titleLabelOne.text = "InfoContentView.GithubProfile.TitleLabelOne".localized
-            titleLabelTwo.text = "InfoContentView.GithubProfile.TitleLabelTwo".localized
-            
-            imageViewTwo.image = UIImage(systemName: "text.alignleft", withConfiguration: boldConfiguration)
-            imageViewTwo.snp.makeConstraints { make in
-                make.height.equalTo(24)
-                make.width.equalTo(27)
-            }
-            
-            companyImageBackgroudnView.backgroundColor = .clear
-            companyImageView.image = UIImage(systemName: "")
+            companyImageBackgroundView.isHidden = true
             
         case .website:
-            button.setButtonType(buttonType: .website)
+            button.bind(buttonBackgorundColor: Colors.red, buttonLabelText: "ButtonTitleLabel.WS".localized, font: .systemFont(ofSize: 20, weight: .bold))
             
-            infoLabelOne.text = infoLabelOneText
+            infoViewOne.bind(image: UIImage(systemName: "person.3", withConfiguration: boldConfiguration),
+                          titleLabelText: "InfoContentView.Website.TitleLabelOne".localized,
+                          infoLabelText: infoLabelOneText,
+                          infoLabelFont: .systemFont(ofSize: 18, weight: .regular),
+                             infoLabelTextAlignment: .left)
             
-            imageViewOne.image = UIImage(systemName: "person.3", withConfiguration: boldConfiguration)
-            imageViewOne.snp.makeConstraints { make in
-                make.height.equalTo(24)
-                make.width.equalTo(39)
+            infoViewTwo.isHidden = true
+            infoViewOne.snp.makeConstraints { make in
+                make.trailing.equalTo(companyImageBackgroundView.snp.trailing).offset(-60)
             }
             
-            imageViewTwo.image = UIImage(systemName: "")
-            
-            titleLabelOne.text = "InfoContentView.Website.TitleLabelOne".localized
-            
-            companyImageBackgroudnView.backgroundColor = Colors.darkGray
+            companyImageBackgroundView.backgroundColor = Colors.darkGray
             companyImageView.image = UIImage(systemName: "paperplane", withConfiguration: mediumConfiguration)
             companyImageView.snp.makeConstraints { make in
                 make.height.equalTo(31)

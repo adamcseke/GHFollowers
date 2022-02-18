@@ -58,9 +58,8 @@ final class RestClient {
             completion(.failure(GithubError.wrongURL))
             return
         }
-        var authUrl = url
-        authUrl.appendQueryParameters([:])
-        let task = URLSession.shared.dataTask(with: authUrl) { data, _, error in
+        
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
                 DispatchQueue.main.async {
                     completion(.failure(error))

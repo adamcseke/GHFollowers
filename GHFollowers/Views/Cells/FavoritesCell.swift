@@ -52,7 +52,6 @@ class FavoritesCell: UITableViewCell {
             make.centerY.equalTo(snp.centerY)
             make.leading.equalTo(userImageView.snp.trailing).offset(25)
             make.centerX.equalToSuperview()
-            make.height.equalTo(40)
         }
     }
     

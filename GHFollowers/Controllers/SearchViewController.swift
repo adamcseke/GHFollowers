@@ -93,7 +93,11 @@ class SearchViewController: UIViewController {
         
         textfield.snp.makeConstraints({ make in
             make.height.equalTo(62)
-            make.leading.equalTo(31)
+            if UIDevice.Devices.iPad {
+                make.leading.equalToSuperview().offset(200)
+            } else {
+                make.leading.equalTo(31)
+            }
             make.centerX.equalToSuperview()
             make.top.equalTo(logoImageView.snp.bottom).offset(53)
         })
@@ -101,16 +105,20 @@ class SearchViewController: UIViewController {
     
     private func configureGetFollowersButton() {
         followersButton = Button()
-        followersButton.setButtonType(buttonType: ButtonType.followers)
+        followersButton.bind(buttonBackgorundColor: Colors.green, buttonLabelText: "ButtonTitleLabel.GF".localized, font: .systemFont(ofSize: 20, weight: .medium))
         followersButton.addTarget(self, action: #selector(getFollowersData), for: .touchUpInside)
         view.addSubview(followersButton)
         
-        followersButton.snp.makeConstraints({ make in
+        followersButton.snp.makeConstraints { make in
             make.height.equalTo(62)
-            make.leading.equalTo(31)
+            if UIDevice.Devices.iPad {
+                make.leading.equalToSuperview().offset(200)
+            } else {
+                make.leading.equalTo(31)
+            }
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().multipliedBy(1.60)
-        })
+        }
     }
     
     @objc private func pushFollowersListVC() {
