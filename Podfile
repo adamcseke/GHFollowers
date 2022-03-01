@@ -16,7 +16,7 @@ target 'GHFollowers' do
     # Pods for testing
   end
 
-pod 'TBEmptyDataSet'
-pod 'SQLite.swift'
+  pod 'TBEmptyDataSet'
+  pod 'SQLite.swift'
 
 end

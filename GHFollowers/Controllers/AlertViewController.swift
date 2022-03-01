@@ -10,6 +10,7 @@ import SnapKit
 
 class AlertViewController: UIViewController {
     
+    private var transparentView: UIView!
     private var containerView: UIView!
     private var titleLabel: UILabel!
     private var messageLabel: UILabel!
@@ -32,18 +33,22 @@ class AlertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        initGestureRecognizer()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first
-        if ((touch?.view) != nil) {
-            dismiss(animated: true)
-        }
+    private func initGestureRecognizer() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
+        transparentView.addGestureRecognizer(tap)
     }
     
+    @objc
+    private func backgroundTapped() {
+        dismiss(animated: true)
+    }
     
     private func setup() {
         configureViewController()
+        configureTransparentView()
         configureContainerView()
         configureTitleLabel()
         configureMessageLabel()
@@ -55,6 +60,15 @@ class AlertViewController: UIViewController {
         view.backgroundColor = .clear
     }
     
+    private func configureTransparentView() {
+        transparentView = UIView()
+        
+        view.addSubview(transparentView)
+        transparentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    
     private func configureContainerView() {
         containerView = UIStackView()
         containerView.layer.cornerRadius = 16
@@ -64,6 +78,7 @@ class AlertViewController: UIViewController {
         containerView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
+            make.height.lessThanOrEqualToSuperview().multipliedBy(0.9)
         }
     }
     
@@ -85,7 +100,7 @@ class AlertViewController: UIViewController {
     
     private func configureMessageLabel() {
         messageLabel = UILabel()
-        messageLabel.numberOfLines = 4
+        messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
         messageLabel.textColor = Colors.userInfoLabels
         messageLabel.text = message ?? ""
