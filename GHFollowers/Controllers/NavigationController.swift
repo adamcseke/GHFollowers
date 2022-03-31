@@ -17,6 +17,7 @@ class NavigationController: UINavigationController {
     private func setup() {
         setupNavigationController()
     }
+    
     private func setupNavigationController() {
         navigationBar.isOpaque = false
         navigationBar.backgroundColor = .clear

@@ -44,7 +44,7 @@ extension User {
     var dateResult: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.full
-        dateFormatter.locale = Locale(identifier: "en")
+        dateFormatter.locale = Locale.current
         dateFormatter.dateFormat = "MMM yyyy"
         dateFormatter.timeZone = .current
         let localDate = dateFormatter.string(from: createdAt)

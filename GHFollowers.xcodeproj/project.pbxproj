@@ -31,7 +31,6 @@
 		375128F427B408EF0034594A /* InfoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375128F327B408EF0034594A /* InfoContentView.swift */; };
 		377D79A527B54A0800E7B4FE /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D79A427B54A0800E7B4FE /* ShadowView.swift */; };
 		377D79A727B551C100E7B4FE /* FavoritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D79A627B551C100E7B4FE /* FavoritesCell.swift */; };
-		377D79AE27B564D800E7B4FE /* SDCAlertView in Frameworks */ = {isa = PBXBuildFile; productRef = 377D79AD27B564D800E7B4FE /* SDCAlertView */; };
 		37973F3C27B673EE00B2AC24 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37973F3B27B673EE00B2AC24 /* EmptyView.swift */; };
 		37973F3E27B6A4EE00B2AC24 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37973F3D27B6A4EE00B2AC24 /* AlertViewController.swift */; };
 		37E02E7327BBB9EE004B3597 /* BoolCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E02E7227BBB9EE004B3597 /* BoolCompletion.swift */; };
@@ -123,7 +122,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				377D79AE27B564D800E7B4FE /* SDCAlertView in Frameworks */,
 				3749D9FD27B2A2890013803B /* SDWebImage in Frameworks */,
 				3749D9EA27B2746E0013803B /* SnapKit in Frameworks */,
 				1B550B193043B7BADC51B707 /* Pods_GHFollowers.framework in Frameworks */,
@@ -359,7 +357,6 @@
 			packageProductDependencies = (
 				3749D9E927B2746E0013803B /* SnapKit */,
 				3749D9FC27B2A2890013803B /* SDWebImage */,
-				377D79AD27B564D800E7B4FE /* SDCAlertView */,
 			);
 			productName = GHFollowers;
 			productReference = 3741BE1C27AD336A00200BF9 /* GHFollowers.app */;
@@ -1009,11 +1006,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3749D9FB27B2A2890013803B /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
-		};
-		377D79AD27B564D800E7B4FE /* SDCAlertView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 377D79AC27B564D800E7B4FE /* XCRemoteSwiftPackageReference "SDCAlertView" */;
-			productName = SDCAlertView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import SDCAlertView
 
 class SearchViewController: UIViewController {
     

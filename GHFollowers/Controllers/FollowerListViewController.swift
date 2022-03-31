@@ -110,12 +110,12 @@ class FollowerListViewController: UIViewController {
             }
             
             if self.isFavorite {
-                DatabaseManager.main.delete(username: self.username ?? "") { _ in
+                DatabaseManager.main.delete(username: self.username?.lowercased() ?? "") { _ in
                     self.isFavorite = false
                     self.changeFavoriteButton(isFavorite: self.isFavorite)
                 }
             } else {
-                DatabaseManager.main.insert(username: self.username ?? "", avatar: user.avatarURL) { _ in
+                DatabaseManager.main.insert(username: self.username?.lowercased() ?? "", avatar: user.avatarURL) { _ in
                     self.isFavorite = true
                     self.changeFavoriteButton(isFavorite: self.isFavorite)
                 }
